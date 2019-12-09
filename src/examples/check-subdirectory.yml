@@ -1,0 +1,15 @@
+description: >
+  Check a Django project that exists in a subdirectory
+
+usage:
+  version: 2.1
+
+  orbs:
+    docker: pennlabs/django@x.y.z
+
+  workflows:
+    build-and-deploy:
+      jobs:
+        - django/check:
+            project-name: pennlabs
+            project-location: backend

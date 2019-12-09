@@ -1,0 +1,15 @@
+description: >
+  Upload test artifacts
+
+parameters:
+  project-location:
+    description: Location of the django project. Defaults to .
+    type: string
+    default: "."
+
+steps:
+- store_test_results:
+    path: << parameters.project-location >>/test-results
+- store_artifacts:
+    path: << parameters.project-location >>/test-results
+    destination: trl

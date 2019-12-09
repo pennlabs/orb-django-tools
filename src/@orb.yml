@@ -1,0 +1,5 @@
+version: 2.1
+
+description: >
+  Test, lint, and upload code coverage for a django project.
+  Built for internal use at Penn Labs.

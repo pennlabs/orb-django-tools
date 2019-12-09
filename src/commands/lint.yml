@@ -1,0 +1,16 @@
+description: >
+  Lint using flake8 and black
+
+parameters:
+  project-location:
+    description: Location of the django project. Defaults to .
+    type: string
+    default: "."
+
+steps:
+- run:
+    name: Lint
+    command: |
+      cd << parameters.project-location >>
+      pipenv run flake8 .
+      pipenv run black -l100 --check .

@@ -1,0 +1,15 @@
+description: >
+  Upload code coverage to Codecov
+
+parameters:
+  project-location:
+    description: Location of the django project. Defaults to .
+    type: string
+    default: "."
+
+steps:
+- run:
+    name: Upload code coverage
+    command: |
+      cd << parameters.project-location >>
+      pipenv run codecov

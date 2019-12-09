@@ -1,0 +1,44 @@
+description: >
+  Check a django project against Penn Labs' standards
+
+parameters:
+  project-location:
+    description: Location of the django project. Defaults to .
+    type: string
+    default: "."
+
+  project-name:
+    description: Name of the django project. Required
+    type: string
+
+  python-version:
+    description: Python version to use. Defaults to 3.7
+    type: string
+    default: "3.7"
+
+docker:
+  - image: circleci/python:<< parameters.python-version >>
+    environment:
+      PIPENV_VENV_IN_PROJECT: true
+      DATABASE_URL: mysql://root:password@127.0.0.1:3306/circle_test
+  - image: circleci/mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: circle_test
+
+steps:
+  - checkout
+  - run: sudo chown -R circleci:circleci /usr/local/bin
+  - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+  - setup:
+      project-location: << parameters.project-location >>
+  - lint:
+      project-location: << parameters.project-location >>
+  - test:
+      project-location: << parameters.project-location >>
+      project-name: << parameters.project-name >>
+  - code-coverage:
+      project-location: << parameters.project-location >>
+  - upload-artifacts:
+      project-location: << parameters.project-location >>

@@ -1,0 +1,19 @@
+description: >
+  Test the django project
+
+parameters:
+  project-location:
+    description: Location of the django project. Defaults to .
+    type: string
+    default: "."
+
+  project-name:
+    description: Name of the django project. Required
+    type: string
+
+steps:
+- run:
+    name: Run tests
+    command: |
+      cd << parameters.project-location >>
+      pipenv run coverage run manage.py test --settings=<< parameters.project-name >>.settings.ci

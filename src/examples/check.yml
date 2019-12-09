@@ -1,0 +1,14 @@
+description: >
+  Check a Django project in the root directory
+
+usage:
+  version: 2.1
+
+  orbs:
+    docker: pennlabs/django@x.y.z
+
+  workflows:
+    build-and-deploy:
+      jobs:
+        - django/check:
+            project-name: pennlabs
