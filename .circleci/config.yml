@@ -21,6 +21,7 @@ workflows:
           orb-ref: pennlabs/django@${CIRCLE_TAG}
           attach-workspace: true
           checkout: false
+          validate: false
           filters:
             tags:
               only: /[0-9]+(\.[0-9]+)*/
