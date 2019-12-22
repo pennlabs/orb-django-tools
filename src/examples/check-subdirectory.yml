@@ -5,7 +5,7 @@ usage:
   version: 2.1
 
   orbs:
-    docker: pennlabs/django@x.y.z
+    django: pennlabs/django-tools@x.y.z
 
   workflows:
     build-and-deploy:
