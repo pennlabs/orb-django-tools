@@ -11,12 +11,14 @@ workflows:
             tags:
               only: /.*/
       - orb-tools/pack:
-          requires: [orb-tools/lint]
+          requires:
+            - orb-tools/lint
           filters:
             tags:
               only: /.*/
       - orb-tools/publish:
-          requires: [orb-tools/pack]
+          requires:
+            - orb-tools/pack
           context: orb-publish
           orb-ref: pennlabs/django-tools@${CIRCLE_TAG}
           attach-workspace: true
