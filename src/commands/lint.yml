@@ -7,10 +7,30 @@ parameters:
     type: string
     default: "."
 
+  black:
+    description: Run black?
+    type: boolean
+    default: true
+
+  flake8:
+    description: Run flake8?
+    type: boolean
+    default: true
+
 steps:
-- run:
-    name: Lint
-    command: |
-      cd << parameters.project-location >>
-      pipenv run flake8 .
-      pipenv run black -l100 --check .
+  - when:
+      condition: <<parameters.flake8>>
+      steps:
+        - run:
+            name: Lint
+            command: |
+              cd << parameters.project-location >>
+              pipenv run flake8 .
+  - when:
+      condition: <<parameters.black>>
+      steps:
+        - run:
+            name: Lint
+            command: |
+              cd << parameters.project-location >>
+              pipenv run black -l100 --check .

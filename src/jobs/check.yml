@@ -16,6 +16,16 @@ parameters:
     type: string
     default: "3.7"
 
+  black:
+    description: Run black?
+    type: boolean
+    default: true
+
+  flake8:
+    description: Run flake8?
+    type: boolean
+    default: true
+
 docker:
   - image: circleci/python:<< parameters.python-version >>
     environment:
@@ -35,6 +45,8 @@ steps:
       project-location: << parameters.project-location >>
   - lint:
       project-location: << parameters.project-location >>
+      black: << parameters.black >>
+      flake8: << parameters.flake8 >>
   - test:
       project-location: << parameters.project-location >>
       project-name: << parameters.project-name >>

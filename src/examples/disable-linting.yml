@@ -1,0 +1,16 @@
+description: >
+  Test a Django project without linting
+
+usage:
+  version: 2.1
+
+  orbs:
+    django: pennlabs/django-tools@x.y.z
+
+  workflows:
+    build-and-deploy:
+      jobs:
+        - django/check:
+            project-name: pennlabs
+            black: false
+            flake8: false
