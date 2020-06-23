@@ -8,8 +8,8 @@ parameters:
     default: "."
 
 steps:
-- store_test_results:
-    path: << parameters.project-location >>/test-results
-- store_artifacts:
-    path: << parameters.project-location >>/test-results
-    destination: trl
+  - store_test_results:
+      path: << parameters.project-location >>/test-results
+  - store_artifacts:
+      path: << parameters.project-location >>/test-results
+      destination: trl

@@ -12,8 +12,8 @@ parameters:
     type: string
 
 steps:
-- run:
-    name: Run tests
-    command: |
-      cd << parameters.project-location >>
-      pipenv run coverage run manage.py test --settings=<< parameters.project-name >>.settings.ci
+  - run:
+      name: Run tests
+      command: |
+        cd << parameters.project-location >>
+        pipenv run coverage run manage.py test --settings=<< parameters.project-name >>.settings.ci

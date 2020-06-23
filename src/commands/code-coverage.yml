@@ -8,9 +8,9 @@ parameters:
     default: "."
 
 steps:
-- run:
-    name: Upload code coverage
-    command: |
-      ROOT=$(pwd)
-      cd << parameters.project-location >>
-      pipenv run codecov --root $ROOT --flags backend
+  - run:
+      name: Upload code coverage
+      command: |
+        ROOT=$(pwd)
+        cd << parameters.project-location >>
+        pipenv run codecov --root $ROOT --flags backend

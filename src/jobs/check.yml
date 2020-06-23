@@ -30,12 +30,12 @@ docker:
   - image: circleci/python:<< parameters.python-version >>
     environment:
       PIPENV_VENV_IN_PROJECT: true
-      DATABASE_URL: mysql://root:password@127.0.0.1:3306/circle_test
-  - image: circleci/mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/postgres
+  - image: postgres:12
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: circle_test
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
 steps:
   - checkout
