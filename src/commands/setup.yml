@@ -14,7 +14,7 @@ parameters:
 
 steps:
   - restore_cache:
-      key: v0-{{ .Branch }}-{{ checksum "<< parameters.python-version >>:<< parameters.project-location >>/Pipfile.lock" }}
+      key: v0-{{ .Branch }}-<< parameters.python-version >>-{{ checksum "<< parameters.project-location >>/Pipfile.lock" }}
   - run:
       name: Install dependencies
       command: |
@@ -22,7 +22,7 @@ steps:
         sudo pip install pipenv
         pipenv install --deploy --dev
   - save_cache:
-      key: v0-{{ .Branch }}-{{ checksum "<< parameters.python-version >>:<< parameters.project-location >>/Pipfile.lock" }}
+      key: v0-{{ .Branch }}-<< parameters.python-version >>-{{ checksum "<< parameters.project-location >>/Pipfile.lock" }}
       paths:
         - "<< parameters.project-location >>/.venv"
         - "/usr/local/bin"
