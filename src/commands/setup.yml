@@ -7,9 +7,14 @@ parameters:
     type: string
     default: "."
 
+  python-version:
+    description: Python version in use. Defaults to 3.7
+    type: string
+    default: "3.7"
+
 steps:
   - restore_cache:
-      key: v0-{{ .Branch }}-{{ checksum "<< parameters.project-location >>/Pipfile.lock" }}
+      key: v0-{{ .Branch }}-{{ checksum "<< parameters.python-version >>:<< parameters.project-location >>/Pipfile.lock" }}
   - run:
       name: Install dependencies
       command: |
@@ -17,8 +22,8 @@ steps:
         sudo pip install pipenv
         pipenv install --deploy --dev
   - save_cache:
-      key: v0-{{ .Branch }}-{{ checksum "<< parameters.project-location >>/Pipfile.lock" }}
+      key: v0-{{ .Branch }}-{{ checksum "<< parameters.python-version >>:<< parameters.project-location >>/Pipfile.lock" }}
       paths:
         - "<< parameters.project-location >>/.venv"
         - "/usr/local/bin"
-        - "/usr/local/lib/python3.7/site-packages"
+        - "/usr/local/lib/python<< parameters.python-version >>/site-packages"

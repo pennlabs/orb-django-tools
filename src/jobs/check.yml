@@ -40,9 +40,10 @@ docker:
 steps:
   - checkout
   - run: sudo chown -R circleci:circleci /usr/local/bin
-  - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
+  - run: sudo chown -R circleci:circleci /usr/local/lib/python<< parameters.python-version >>/site-packages
   - setup:
       project-location: << parameters.project-location >>
+      python-version: << parameters.python-version >>
   - lint:
       project-location: << parameters.project-location >>
       black: << parameters.black >>
